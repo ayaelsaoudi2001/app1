@@ -3,8 +3,15 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import requests
+from io import StringIO
 
-data = pd.read_csv('C:/Users/acc/Desktop/spring 2024/MSBA325 - Data Visualization & Communication/assignment 1/jobs_in_data.csv')
+# GitHub raw content URL
+url = 'https://raw.githubusercontent.com/ayaelsaoudi2001/app1/main/jobs_in_data.csv'
+# Fetch data from GitHub
+response = requests.get(url)
+data = pd.read_csv(StringIO(response.text))
+# data = pd.read_csv('C:/Users/acc/Desktop/spring 2024/MSBA325 - Data Visualization & Communication/assignment 1/jobs_in_data.csv')
 data_science=data[data['job_category']=='Data Science and Research']
 
 st.header('Visualization #1:')
